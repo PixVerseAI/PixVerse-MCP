@@ -1,0 +1,15 @@
+[project]
+name = "PixVerse-MCP"
+version = "0.1.15"
+description = "xxxxxxAdd your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+]
+
+[project.scripts]
+mcppix = "main:main"
+
+[tool.uvx]
+entry-point = "main.py"
