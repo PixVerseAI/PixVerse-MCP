@@ -8,7 +8,7 @@ from typing import Dict, Any, Optional, List
 from mcp.server.fastmcp import FastMCP
 from dotenv import load_dotenv
 
-from validate import (
+from .validate import (
     validate_aspect_ratio,
     validate_duration,
     validate_quality,
@@ -16,8 +16,8 @@ from validate import (
     validate_model,
     validate_seed
 )
-from req_client import make_pixverse_request, poll_video_status
-from const import API_BASE_URL
+from .req_client import make_pixverse_request, poll_video_status
+from .const import API_BASE_URL
 
 # Set logging output to stderr (stdout is reserved for MCP communication)
 logging.basicConfig(level=logging.INFO, stream=sys.stderr, 

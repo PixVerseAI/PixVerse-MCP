@@ -10,7 +10,7 @@ import sys
 from urllib.parse import urljoin
 from typing import Dict, Any, Optional, List
 
-from const import API_BASE_URL, POLL_INTERVAL, API_KEY
+from .const import API_BASE_URL, POLL_INTERVAL, API_KEY
 
 # Set up logger
 logger = logging.getLogger("pixverse-mcp")
