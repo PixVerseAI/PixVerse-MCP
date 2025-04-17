@@ -63,7 +63,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 ## How to Use MCP Server
 
 ### 1. Get PixVerse API Key
-- Visit the [PixVerse Platform](https://platform.pixverse.ai)
+- Visit the [PixVerse Platform](https://platform.pixverse.ai?utm_source=github&utm_medium=readme&utm_campaign=mcp)
 - Register or log into your account
 - Create and copy your API key from the account settings
 - [API key generation guide](https://docs.platform.pixverse.ai/how-to-get-api-key-882968m0)
@@ -220,10 +220,10 @@ Look at this forest path photo and design a short video concept, either a micro-
 3. View error logs (typically in the log folders of Claude or Cursor)
 
 **Does MCP support image-to-video or keyframe features?**
-- Not yet. These features are only available via the PixVerse API.
+- Not yet. These features are only available via the PixVerse API. [API Docs](https://docs.platform.pixverse.ai)
 
 **How to obtain credits?**
-- If you haven't topped up on the API platform yet, please do so first.
+- If you haven't topped up on the API platform yet, please do so first. [PixVerse Platform](https://platform.pixverse.ai/billing?utm_source=github&utm_medium=readme&utm_campaign=mcp)
 
 **What video formats and sizes are supported?**
 - PixVerse supports resolutions from 360p to 1080p, and aspect ratios from 9:16 (portrait) to 16:9 (landscape).
@@ -265,4 +265,4 @@ v1.0.0
 - Supports text-to-video generation via MCP
 - Enables video link retrieval
 - Integrates with Claude and Cursor for enhanced workflows
-- Supports both local Python and NPM Node.js MCP servers
+- Supports Cloud based Python MCP servers
