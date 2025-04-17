@@ -1,15 +1,17 @@
 [project]
-name = "PixVerse-MCP"
-version = "0.1.15"
-description = "xxxxxxAdd your description here"
+name = "pixverse-mcp"
+version = "0.1.22"
+description = "PixVerse MCP integration for video generation"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "mcp[cli]>=1.6.0",
+    "httpx>=0.24.0",
+    "python-dotenv>=1.0.0"
 ]
 
 [project.scripts]
-mcppix = "main:main"
+pixverse-mcp = "pixverse_mcp.__main__:main"
 
 [tool.uvx]
-entry-point = "main.py"
+entry-point = "pixverse_mcp.__main__:main"
