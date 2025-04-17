@@ -10,7 +10,7 @@
 
 A tool that allows you to access PixVerse's latest video generation models via applications that support the Model Context Protocol (MCP), such as Claude or Cursor.
 
-[中文文档]()
+[中文文档](https://github.com/PixVerseAI/PixVerse-MCP/blob/main/README-CN.md)
 
 
 ## Overview
