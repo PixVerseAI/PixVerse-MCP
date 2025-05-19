@@ -13,6 +13,9 @@ A tool that allows you to access PixVerse's latest video generation models via a
 [中文文档](https://github.com/PixVerseAI/PixVerse-MCP/blob/main/README-CN.md)
 
 
+https://github.com/user-attachments/assets/08ce90b7-2591-4256-aff2-9cc51e156d00
+
+
 ## Overview
 
 PixVerse MCP is a tool that allows you to access PixVerse's latest video generation models via applications that support the Model Context Protocol (MCP), such as Claude or Cursor. This integration enables you to generate high-quality videos anytime, anywhere — including text-to-video, image-to-video, and more.
