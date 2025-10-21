@@ -1,0 +1,16 @@
+# Pixverse MCP Configuration Template
+# Copy this file to config.yaml and fill in your configuration
+
+# API Configuration
+base_url: "https://app-api.pixverseai.ai"  # Pixverse API base URL
+api_key: "YOUR_PIXVERSE_API_KEY_HERE"      # Replace with your Pixverse API Key
+
+# Server Configuration (optional)
+timeout: 30          # Request timeout in seconds
+max_retries: 3       # Maximum retry attempts
+
+# Usage instructions:
+# 1. Copy this file to config.yaml
+# 2. Replace YOUR_PIXVERSE_API_KEY_HERE with your real API Key
+# 3. Adjust other configuration items as needed
+# 4. Run: uvx pixverse-mcp --config config.yaml

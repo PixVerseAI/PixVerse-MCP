@@ -1,0 +1,7 @@
+# Pixverse MCP Configuration File
+# This is the MCP program configuration containing server settings and defaults
+# Users must configure PIXVERSE_API_KEY environment variable in ~/.cursor/mcp.json
+
+# API Configuration
+base_url: "https://app-api.pixverseai.cn"  # MCP program configuration, users don't need to modify
+# Note: api_key must be provided via PIXVERSE_API_KEY environment variable
