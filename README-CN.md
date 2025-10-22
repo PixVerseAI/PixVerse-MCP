@@ -10,15 +10,21 @@
 
 ## 概述
 
-PixVerse MCP 是一个允许您通过支持 Model Context Protocol (MCP) 的应用程序（如 Claude 或 Cursor）访问 PixVerse 最新视频生成模型的工具。通过这个集成，您可以随时随地生成高质量视频，包括文本到视频、图像到视频等多种转换方式。
+PixVerse MCP 是一个允许您通过支持 Model Context Protocol (MCP) 的应用程序（如 Claude 或 Cursor）访问 PixVerse 最新的视频生成模型。从文本生成视频、动画图片、创建过渡、添加唇形同步、音效等等！
 
 [English Version](https://github.com/PixVerseAI/PixVerse-MCP/blob/main/README.md)
 
 ## 主要功能
 
-* **文本生成视频**：使用文字提示生成创意视频
-* **支持多种参数调整**：控制视频质量、长度、宽高比等
-* **与AI助手协同创作**：结合Claude等大模型的创意能力
+- **文本转视频**：使用文本提示生成创意视频
+- **图片转视频**：将静态图片转换为动态视频
+- **视频扩展**：无缝扩展现有视频以创建更长的序列
+- **首尾帧**：在不同图片之间创建平滑变形
+- **唇形同步**：为说话人头像视频添加逼真的唇形同步（支持TTS或自定义音频）
+- **音效生成**：基于视频内容生成情境音效
+- **多主体**：将多个主体合成到一个场景中
+- **资源管理**：从本地文件或URL上传图片和视频
+- **与AI助手协同创作**：与Claude等AI模型协作增强您的创意工作流程
 
 ## 系统组件
 
@@ -219,6 +225,144 @@ PixVerse MCP 是一个允许您通过支持 Model Context Protocol (MCP) 的应�
 看一下这张森林小径照片，为我构思一个短视频创意，可以是一个微型故事或情绪变化的场景。
 ```
 
+## 功能使用指南
+
+### 文本转视频
+```
+生成一个日落海景视频，金色阳光反射在水面上
+```
+**参数示例**：
+```
+提示词: "雄鹰在日出时翱翔于山峰之上"
+质量: 720p
+时长: 5秒
+模型: v5
+宽高比: 16:9
+```
+
+### 图片转视频
+```
+1. 上传图片 → 获得img_id
+2. 使用img_id生成动画视频
+```
+**参数示例**：
+```
+提示词: "角色走过充满发光树木的魔法森林"
+img_id: 12345
+质量: 720p
+时长: 5秒
+模型: v5
+```
+
+### 视频扩展
+```
+使用source_video_id扩展现有视频
+```
+**参数示例**：
+```
+提示词: "场景继续，角色发现了一个隐藏的洞穴"
+source_video_id: 67890
+时长: 5秒
+质量: 720p
+模型: v5
+```
+
+### 场景过渡
+```
+上传两张图片，创建平滑变形动画
+```
+**参数示例**：
+```
+提示词: "从阳光海滩转变为暴风雨夜空"
+first_frame_img: 11111
+last_frame_img: 22222
+时长: 5秒
+质量: 720p
+模型: v5
+```
+
+### 唇形同步
+```
+视频: 
+TTS: 选择说话人 + 输入文本
+音频: 上传音频文件 + 视频
+```
+**参数示例**：
+```
+# 方法1: 生成视频 + TTS
+source_video_id: 33333
+lip_sync_tts_speaker_id: "speaker_001"
+lip_sync_tts_content: "欢迎来到我们的精彩视频教程"
+
+# 方法2: 生成视频 + 自定义音频
+source_video_id: 33333
+audio_media_id: 44444
+
+# 方法3: 上传视频 + TTS
+video_media_id: 55555  # 先上传您的视频
+lip_sync_tts_speaker_id: "speaker_002"
+lip_sync_tts_content: "这是自定义旁白"
+
+# 方法4: 上传视频 + 自定义音频
+video_media_id: 55555  # 先上传您的视频
+audio_media_id: 44444  # 先上传您的音频
+```
+
+### 音效生成
+```
+描述音效: "海浪声、海鸥叫声、轻柔的风声"
+```
+**参数示例**：
+```
+# 方法1: 生成视频 + 音效
+sound_effect_content: "轻柔的海浪声、海鸥叫声、柔和的风声"
+source_video_id: 55555
+original_sound_switch: true  # 保留原音频
+
+# 方法2: 上传视频 + 音效
+sound_effect_content: "城市交通声、脚步声、城市氛围"
+video_media_id: 66666  # 先上传您的视频
+original_sound_switch: false  # 替换原音频
+
+# 方法3: 完全替换音频
+sound_effect_content: "史诗管弦乐、雷声、戏剧性紧张感"
+video_media_id: 77777  # 先上传您的视频
+original_sound_switch: false  # 用新音频替换
+```
+
+### 融合视频
+```
+上传多个图片，使用@ref_name引用
+例如: @人物 站在 @城市 前，@无人机 在背景中飞行
+```
+**参数示例**：
+```
+提示词: "@英雄 站在@城市 前，@无人机 在头顶飞行"
+image_references: [
+  {type: "subject", img_id: 66666, ref_name: "英雄"},
+  {type: "background", img_id: 77777, ref_name: "城市"},
+  {type: "subject", img_id: 88888, ref_name: "无人机"}
+]
+时长: 5秒
+模型: v4.5
+质量: 720p
+宽高比: 16:9
+```
+
+### 状态监控
+```
+每6秒检查一次video_id状态，直到完成
+```
+**参数示例**：
+```
+video_id: 99999
+# 每6秒检查一次，直到状态变为"completed"或"failed"
+# 典型生成时间: 60-120秒
+```
+**状态**: pending → in_progress → completed/failed
+
+
+
 ## 常见问题
 
 **如何获取 PixVerse API 密钥？**
@@ -274,8 +418,16 @@ Windows
 - 电子邮件: [api@pixverse.ai](mailto:api@pixverse.ai)
 - 官方网站: [https://platform.pixverse.ai](https://platform.pixverse.ai?utm_source=github&utm_medium=readme&utm_campaign=mcp)
 
-## Release Notes (1.0.0)
+## Release Notes 
+v2.0.0 (最新)
+- **新增**: 图片转视频
+- **新增**: 视频扩展和首尾帧
+- **新增**: 唇形同步和音效生成
+- **新增**: 融合视频和资源上传
+- **新增**: 实时状态监控
+- **改进**: 增强错误处理和并行生成
 
+v1.0.0
 - 通过MCP支持文生视频，获取视频链接
 - 与Claude & Cursor结合创造更多玩法
 - 支持Cloud Python MCP server
