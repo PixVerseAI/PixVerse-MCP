@@ -8,7 +8,7 @@
 </a>
 </div>
 
-A tool that allows you to access PixVerse's latest video generation models via applications that support the Model Context Protocol (MCP), such as Claude or Cursor.
+A comprehensive tool that allows you to access PixVerse's latest video generation models via applications that support the Model Context Protocol (MCP), such as Claude or Cursor. Generate videos from text, animate images, create transitions, add lip sync, sound effects, and much more!
 
 [中文文档](https://github.com/PixVerseAI/PixVerse-MCP/blob/main/README-CN.md)
 
@@ -18,12 +18,19 @@ https://github.com/user-attachments/assets/08ce90b7-2591-4256-aff2-9cc51e156d00
 
 ## Overview
 
-PixVerse MCP is a tool that allows you to access PixVerse's latest video generation models via applications that support the Model Context Protocol (MCP), such as Claude or Cursor. This integration enables you to generate high-quality videos anytime, anywhere — including text-to-video, image-to-video, and more.
+PixVerse MCP is a powerful tool that enables you to access PixVerse's latest video generation models through applications that support the Model Context Protocol (MCP). This integration allows you to generate high-quality videos with advanced features including text-to-video, image-to-video, video extensions, transitions, lip sync, sound effects, and more.
 
 ## Key Features
 
 - **Text-to-Video Generation**: Generate creative videos using text prompts
+- **Image-to-Video Animation**: Animate static images into dynamic videos
 - **Flexible Parameter Control**: Adjust video quality, length, aspect ratio, and more
+- **Video Extension**: Extend existing videos seamlessly for longer sequences
+- **Scene Transitions**: Create smooth morphing between different images
+- **Lip Sync**: Add realistic lip sync to talking head videos with TTS or custom audio
+- **Sound Effects**: Generate contextual sound effects based on video content
+- **Fusion Video**: Composite multiple subjects into one scene (v4.5 only)
+- **Resource Management**: Upload images and videos from local files or URLs
 - **Co-Creation with AI Assistants**: Collaborate with AI models like Claude to enhance your creative workflow
 
 ## System Components
@@ -126,7 +133,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 4. Fill in the server details as in the JSON config above
 5. Save and restart or refresh the MCP server
 
-## Usage Examples
+## Advanced Usage Example
 
 ### Text-to-Video
 
@@ -212,6 +219,144 @@ If this street photo is the opening scene of a movie, what happens next? Provide
 Look at this forest path photo and design a short video concept, either a micro-story or a scene with emotional progression.
 ```
 
+
+## Feature Usage Gudie
+### Text-to-Video
+```
+Generate a sunset ocean video with golden sunlight reflecting on the water
+```
+**Example with parameters**:
+```
+Prompt: "A majestic eagle soaring over mountain peaks at sunrise"
+Quality: 720p
+Duration: 5
+Model: v5
+Aspect Ratio: 16:9
+```
+**Parameters**: Quality(360p-1080p), Duration(5s/8s), Aspect Ratio(16:9/1:1/9:16), model(v4.5/v5)
+
+### Image-to-Video
+```
+1. Upload image → Get img_id
+2. Use img_id to generate animated video
+```
+**Example with parameters**:
+```
+Prompt: "The character walks through a magical forest with glowing trees"
+img_id: 12345
+Quality: 720p
+Duration: 5s
+Model: v5
+```
+
+### Video Extension
+```
+Use source_video_id to extend existing video
+```
+**Example with parameters**:
+```
+Prompt: "The scene continues with the character discovering a hidden cave"
+source_video_id: 67890
+Duration: 5s
+Quality: 720p
+Model: v5
+```
+
+### Scene Transitions
+```
+Upload two images to create smooth morphing animation
+```
+**Example with parameters**:
+```
+Prompt: "Transform from sunny beach to stormy night sky"
+first_frame_img: 11111
+last_frame_img: 22222
+Duration: 5s
+Quality: 720p
+Model: v5
+```
+
+### Lip Sync
+```
+Video: 
+TTS: Choose speaker + input text
+Audio: Upload audio file + video
+```
+**Example with parameters**:
+```
+# Method 1: Generated Video + TTS
+source_video_id: 33333
+lip_sync_tts_speaker_id: "speaker_001"
+lip_sync_tts_content: "Welcome to our amazing video tutorial"
+
+# Method 2: Generated Video + Custom Audio
+source_video_id: 33333
+audio_media_id: 44444
+
+# Method 3: Uploaded Video + TTS
+video_media_id: 55555  # Upload your video first
+lip_sync_tts_speaker_id: "speaker_002"
+lip_sync_tts_content: "This is a custom narration"
+
+# Method 4: Uploaded Video + Custom Audio
+video_media_id: 55555  # Upload your video first
+audio_media_id: 44444  # Upload your audio first
+```
+
+### Sound Effects
+```
+Describe effects: "Ocean waves, seagull calls, gentle wind"
+```
+**Example with parameters**:
+```
+# Method 1: Generated Video + Sound Effects
+sound_effect_content: "Gentle ocean waves, seagull calls, soft wind"
+source_video_id: 55555
+original_sound_switch: true  # Keep original audio
+
+# Method 2: Uploaded Video + Sound Effects
+sound_effect_content: "Urban traffic, footsteps, city ambiance"
+video_media_id: 66666  # Upload your video first
+original_sound_switch: false  # Replace original audio
+
+# Method 3: Replace Audio Completely
+sound_effect_content: "Epic orchestral music, thunder, dramatic tension"
+video_media_id: 77777  # Upload your video first
+original_sound_switch: false  # Replace with new audio
+```
+
+### Fusion Video
+```
+Upload multiple images, use @ref_name references
+Example: @person standing in front of @city with @drone flying overhead
+```
+**Example with parameters**:
+```
+Prompt: "@hero standing in front of @city with @drone flying overhead"
+image_references: [
+  {type: "subject", img_id: 66666, ref_name: "hero"},
+  {type: "background", img_id: 77777, ref_name: "city"},
+  {type: "subject", img_id: 88888, ref_name: "drone"}
+]
+Duration: 5s
+Model:v4.5
+Quality: 720p
+Aspect Ratio: 16:9
+```
+
+### 📊 Status Monitoring
+```
+Check video_id status every 6 seconds until completion
+```
+**Example with parameters**:
+```
+video_id: 99999
+# Check every 6 seconds until status becomes "completed" or "failed"
+# Typical generation time: 60-120 seconds
+```
+**Status**: pending → in_progress → completed/failed
+
+
 ## FAQ
 
 **How do I get a PixVerse API key?**
@@ -264,6 +409,19 @@ where uvx
 - Website: https://platform.pixverse.ai
 
 ## Release Notes
+v2.0.0 (Latest)
+- **NEW**: Image-to-video animation
+- **NEW**: Video extension for longer sequences
+- **NEW**: Scene transitions between images
+- **NEW**: Lip sync with TTS and custom audio
+- **NEW**: AI-generated sound effects
+- **NEW**: Fusion video for composite scenes
+- **NEW**: TTS speaker selection
+- **NEW**: Resource upload (images/videos) with file or url
+- **NEW**: Real-time status monitoring
+- **IMPROVED**: Enhanced error handling and user feedback
+- **IMPROVED**: Parallel video generation support
+
 v1.0.0
 - Supports text-to-video generation via MCP
 - Enables video link retrieval
