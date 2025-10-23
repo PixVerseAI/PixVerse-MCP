@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/pixverseai-pixverse-mcp-badge.png)](https://mseep.ai/app/pixverseai-pixverse-mcp)
+
 # PixVerse MCP
 <div align="left">
 <a href="https://app.pixverse.ai" style="margin: 2px">
